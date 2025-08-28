@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GECA Music Club Yearly Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+        }
+
+        .yearly-overview {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .overview-card {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .overview-card h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .overview-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FFD700;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .monthly-timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, #FFD700, #FFA500);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .month-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .month-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: #FFD700;
+            border: 4px solid #667eea;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .month-content {
+            padding: 20px 25px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .month-content:hover {
+            transform: scale(1.02);
+        }
+
+        .month-title {
+            color: #FFD700;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .activity-list {
+            color: white;
+            line-height: 1.6;
+        }
+
+        .activity-item {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .activity-item::before {
+            content: '♪';
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .unique-activities {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideInRight 1s ease-out;
+        }
+
+        .unique-activities h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        .unique-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .unique-card {
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,165,0,0.2));
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .unique-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .unique-card h4 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .floating-notes {
+            position: fixed;
+            font-size: 2rem;
+            color: rgba(255,215,0,0.3);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .note1 { top: 10%; left: 5%; animation: float1 6s ease-in-out infinite; }
+        .note2 { top: 20%; right: 8%; animation: float2 8s ease-in-out infinite; }
+        .note3 { bottom: 15%; left: 10%; animation: float3 7s ease-in-out infinite; }
+        .note4 { bottom: 25%; right: 15%; animation: float4 5s ease-in-out infinite; }
+
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(-3deg); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(8deg); }
+        }
+
+        @keyframes float4 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(-5deg); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .overview-grid { grid-template-columns: 1fr; }
+            .timeline::after { left: 31px; }
+            .month-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .month-container::after {
+                left: 21px;
+            }
+            .right { left: 0%; }
+            .right::after { left: 21px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-notes note1">🎵</div>
+    <div class="floating-notes note2">🎶</div>
+    <div class="floating-notes note3">🎼</div>
+    <div class="floating-notes note4">🎤</div>
+
+    <div class="container">
+        <div class="header">
+            <h1>GECA Music Club</h1>
+            <p>Yearly Plan 2024-25 | Rhythm • Melody • Harmony</p>
+        </div>
+
+        <div class="yearly-overview">
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <span class="number">5-6</span>
+                    <h3>Internal Events</h3>
+                </div>
+                <div class="overview-card">
+                    <span class="number">6-8</span>
+                    <h3>External Competitions</h3>
+                </div>
+                <div class="overview-card">
+                    <span class="number">2-3</span>
+                    <h3>Workshops</h3>
+                </div>
+                <div class="overview-card">
+                    <span class="number">2-3</span>
+                    <h3>Collaborations</h3>
+                </div>
+                <div class="overview-card">
+                    <span class="number">2-3</span>
+                    <h3>Social Events</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="monthly-timeline">
+            <div class="timeline">
+                <div class="month-container left">
+                    <div class="month-content">
+                        <h3 class="month-title">September</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">Freshers' Orientation + Intro Jam</div>
+                            <div class="activity-item">Open Mic Night for Freshers</div>
+                            <div class="activity-item">Classical & Semi-Classical Night</div>
+                            <div class="activity-item">Mood Indigo (IIT Bombay) Applications</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-container right">
+                    <div class="month-content">
+                        <h3 class="month-title">October</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">Mid-Sem Break Jam Sessions</div>
+                            <div class="activity-item">State-level Competition Participation</div>
+                            <div class="activity-item">Collab: Musical Drama with Performing Arts</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-container left">
+                    <div class="month-content">
+                        <h3 class="month-title">November</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">Battle of Bands (Inter-departmental)</div>
+                            <div class="activity-item">Impressions (COEP Pune Fest)</div>
+                            <div class="activity-item">MIT Pune Cultural Fest</div>
+                            <div class="activity-item">Music Production Workshop</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-container right">
+                    <div class="month-content">
+                        <h3 class="month-title">December</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">Mood Indigo (IIT Bombay) Participation</div>
+                            <div class="activity-item">Fusion Concert (Western + Indian)</div>
+                            <div class="activity-item">Christmas Concert at NGO/Old Age Home</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-container left">
+                    <div class="month-content">
+                        <h3 class="month-title">January</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">Republic Day Patriotic Songs</div>
+                            <div class="activity-item">Tech Fest Cultural Night</div>
+                            <div class="activity-item">Music + Tech Hackathon Collab</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-container right">
+                    <div class="month-content">
+                        <h3 class="month-title">February</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">Firodiya Karandak (Pune)</div>
+                            <div class="activity-item">Duet & Group Singing Competition</div>
+                            <div class="activity-item">Spoken Word + Live Music Night</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-container left">
+                    <div class="month-content">
+                        <h3 class="month-title">March</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">Solo Instrumental Night</div>
+                            <div class="activity-item">Western Music Workshop</div>
+                            <div class="activity-item">Local Intercollege Competitions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="month-container right">
+                    <div class="month-content">
+                        <h3 class="month-title">April</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">Annual GECA Music Concert</div>
+                            <div class="activity-item">Cultural Closing Ceremony</div>
+                            <div class="activity-item">Final College Fest Participations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unique-activities">
+            <h2>✨ Unique Activity Ideas ✨</h2>
+            <div class="unique-grid">
+                <div class="unique-card">
+                    <h4>🎨 Music + Painting Live Jam</h4>
+                    <p>Artists paint while musicians perform live</p>
+                </div>
+                <div class="unique-card">
+                    <h4>🌙 Acoustic Evenings</h4>
+                    <p>Unplugged music in hostel courtyard</p>
+                </div>
+                <div class="unique-card">
+                    <h4>⚡ Flash Mob with Live Music</h4>
+                    <p>Surprise performances across campus</p>
+                </div>
+                <div class="unique-card">
+                    <h4>🎬 Film Club Collaboration</h4>
+                    <p>Original background scores for short films</p>
+                </div>
+                <div class="unique-card">
+                    <h4>🏆 Inter-College GECA Music Fest</h4>
+                    <p>Host major competition inviting nearby colleges</p>
+                </div>
+                <div class="unique-card">
+                    <h4>📱 Podcast & YouTube Channel</h4>
+                    <p>Interviews, live jams, behind-the-scenes content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
