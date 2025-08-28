@@ -28,6 +28,77 @@
             text-align: center;
             margin-bottom: 40px;
             animation: fadeInDown 1s ease-out;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #F1C40F;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 4px solid rgba(255,255,255,0.3);
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
+        .piano-keys {
+            display: flex;
+            margin-bottom: 8px;
+            transform: scale(0.6);
+        }
+
+        .key {
+            width: 8px;
+            height: 24px;
+            margin: 0 1px;
+            border-radius: 0 0 2px 2px;
+        }
+
+        .white-key {
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        .black-key {
+            background: #333;
+            height: 16px;
+            position: relative;
+            z-index: 2;
+            margin: 0 -4px;
+        }
+
+        .logo-text {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .hindi-text {
+            font-size: 16px;
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+        }
+
+        .english-text {
+            font-size: 7px;
+            letter-spacing: 2px;
+            opacity: 0.8;
         }
 
         .header h1 {
@@ -281,6 +352,19 @@
                 padding: 10px;
             }
             
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .hindi-text {
+                font-size: 14px;
+            }
+            
+            .english-text {
+                font-size: 6px;
+            }
+            
             .header h1 { 
                 font-size: 2rem; 
                 margin-bottom: 5px;
@@ -381,6 +465,23 @@
         }
 
         @media (max-width: 480px) {
+            .logo {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .hindi-text {
+                font-size: 12px;
+            }
+            
+            .english-text {
+                font-size: 5px;
+            }
+            
+            .piano-keys {
+                transform: scale(0.5);
+            }
+            
             .header h1 { 
                 font-size: 1.7rem; 
             }
@@ -469,6 +570,28 @@
 
     <div class="container">
         <div class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <div class="piano-keys">
+                        <div class="key white-key"></div>
+                        <div class="key black-key"></div>
+                        <div class="key white-key"></div>
+                        <div class="key black-key"></div>
+                        <div class="key white-key"></div>
+                        <div class="key white-key"></div>
+                        <div class="key black-key"></div>
+                        <div class="key white-key"></div>
+                        <div class="key black-key"></div>
+                        <div class="key white-key"></div>
+                        <div class="key black-key"></div>
+                        <div class="key white-key"></div>
+                    </div>
+                    <div class="logo-text">
+                        <div class="hindi-text">सारंग</div>
+                        <div class="english-text">HARMONY HUB</div>
+                    </div>
+                </div>
+            </div>
             <h1>GECA Music Club</h1>
             <p>Yearly Plan 2024-25 | Rhythm • Melody • Harmony</p>
         </div>
